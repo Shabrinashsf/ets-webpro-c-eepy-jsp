@@ -36,7 +36,7 @@
 
     <div class="navbar-title">
         <a href="${pageContext.request.contextPath}/index.jsp">Homepage</a>
-        <a href="${pageContext.request.contextPath}/room/room.jsp">Room</a>
+        <a href="${pageContext.request.contextPath}/rooms">Room</a>
     </div>
 
     <div>
@@ -59,8 +59,8 @@
         <% } else { %>
         <!-- BELUM LOGIN -->
             <div class="sign">
-                <a href="login/login.jsp" class="btn white-login" id="loginbtn">Login</a>
-                <a href="register/register.jsp" class="btn" id="registbtn">Register</a>
+                <a href="${pageContext.request.contextPath}/login/login.jsp" class="btn white-login" id="loginbtn">Login</a>
+                <a href="${pageContext.request.contextPath}/register/register.jsp" class="btn" id="registbtn">Register</a>
             </div>
         <% } %>
 
@@ -285,7 +285,6 @@
 
 <!-- JS -->
 <script>
-    console.log("contextPath =", window.contextPath);
     window.contextPath = "${pageContext.request.contextPath}";
     window.images = [
         "${pageContext.request.contextPath}/image/home-hotel.jpg",
@@ -294,7 +293,6 @@
         "${pageContext.request.contextPath}/image/home-hotel4.jpeg",
         "${pageContext.request.contextPath}/image/home-hotel5.jpeg"
     ];
-    console.log("images =", window.images);
 </script>
 <script src="${pageContext.request.contextPath}/script.js"></script>
 </body>

@@ -8,6 +8,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/components/sidebar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/components" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/login/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/login" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/room/room.jsp" value="file://$PROJECT_DIR$/src/main/webapp/room" />
       </map>
     </option>
   </component>
