@@ -1,3 +1,31 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const layers = document.querySelectorAll(".bg-layer");
+    let index = 0;
+    const images = window.images;
+
+    // preload images
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    // inisialisasi layer pertama
+    layers[0].style.backgroundImage = `url(${images[0]})`;
+    layers[0].classList.add("active");
+
+    setInterval(() => {
+        const nextIndex = (index + 1) % images.length;
+        const currentLayer = layers[index % 2];
+        const nextLayer = layers[(index + 1) % 2];
+
+        nextLayer.style.backgroundImage = `url(${images[nextIndex]})`;
+        nextLayer.classList.add("active");
+        currentLayer.classList.remove("active");
+
+        index = nextIndex;
+    }, 5000);
+});
+
 // Toggle Class Active
 const navbartitle = document.querySelector(".navbar-title");
 const hamMenu = document.querySelector("#ham-menu");
@@ -37,22 +65,6 @@ window.addEventListener("scroll", checkScroll);
 window.addEventListener("resize", checkScroll);
 
 // background change
-
-const bg = document.querySelector(".background");
-const images = [
-    "/images/home-hotel.jpg",
-    "/images/home-hotel2.jpeg",
-    "/images/home-hotel3.jpeg",
-    "/images/home-hotel4.jpeg",
-    "/images/home-hotel5.jpeg",
-];
-
-let index = 0;
-
-setInterval(() => {
-    index = (index + 1) % images.length;
-    bg.style.backgroundImage = `url(${images[index]})`;
-}, 5000);
 
 // Calendar
 const datepicker = document.querySelector(".datepicker");

@@ -35,7 +35,7 @@
     </div>
 
     <div class="navbar-title">
-        <a href="index.jsp">Homepage</a>
+        <a href="${pageContext.request.contextPath}/index.jsp">Homepage</a>
         <a href="${pageContext.request.contextPath}/room/room.jsp">Room</a>
     </div>
 
@@ -43,7 +43,7 @@
         <% if (userName != null && "user".equals(userRole)) { %>
             <!-- USER NORMAL -->
             <div class="profile">
-                <a href="${pageContext.request.contextPath}/user/user_profile.jsp" id="user"">
+                <a href="${pageContext.request.contextPath}/user/user_profile.jsp" id="user">
                     <i data-feather="user"></i>
                     <span class="text-black"><%= userName %></span>
                 </a>
@@ -72,8 +72,8 @@
 
     <!-- Sidebar muncul di mobile/tablet -->
     <div class="sidebar" id="sidebar">
-        <a href="#home">Homepage</a>
-        <a href="{{ route('room') }}">Room</a>
+        <a href="${pageContext.request.contextPath}/index.jsp">Homepage</a>
+        <a href="${pageContext.request.contextPath}/room/room.jsp">Room</a>
         <div class="side-sign">
             <button class="btn white-login" id="side-login">Login</button>
             <button class="btn" id="side-register">Register</button>
@@ -85,7 +85,10 @@
 
 <!-- Main Section -->
 <main>
-    <div class="background"></div>
+    <div class="background">
+        <div class="bg-layer layer1"></div>
+        <div class="bg-layer layer2"></div>
+    </div>
 
     <div class="hero">
         <h1>Welcome to Eepy Hotel</h1>
@@ -281,7 +284,19 @@
 </script>
 
 <!-- JS -->
-<script src="script.js"></script>
+<script>
+    console.log("contextPath =", window.contextPath);
+    window.contextPath = "${pageContext.request.contextPath}";
+    window.images = [
+        "${pageContext.request.contextPath}/image/home-hotel.jpg",
+        "${pageContext.request.contextPath}/image/home-hotel2.jpeg",
+        "${pageContext.request.contextPath}/image/home-hotel3.jpeg",
+        "${pageContext.request.contextPath}/image/home-hotel4.jpeg",
+        "${pageContext.request.contextPath}/image/home-hotel5.jpeg"
+    ];
+    console.log("images =", window.images);
+</script>
+<script src="${pageContext.request.contextPath}/script.js"></script>
 </body>
 
 </html>
