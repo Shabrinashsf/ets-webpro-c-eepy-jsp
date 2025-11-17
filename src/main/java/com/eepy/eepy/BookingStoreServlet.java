@@ -31,7 +31,7 @@ public class BookingStoreServlet extends HttpServlet {
 
             // Simpan ke DB
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "INSERT INTO bookings (user_id, room_type_id, name, phone, checkin, checkout, payment_method, total_price) " +
+                String sql = "INSERT INTO bookings (user_id, room_id, name, phone, checkin, checkout, payment_method, total_price) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                     stmt.setString(1, userId);

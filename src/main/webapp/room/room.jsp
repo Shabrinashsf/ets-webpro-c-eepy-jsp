@@ -1,7 +1,7 @@
 <%
     String userName = (String) session.getAttribute("userName");
     String userRole = (String) session.getAttribute("userRole");
-    int userID = (int) session.getAttribute("userID");
+    Integer userID = (Integer) session.getAttribute("userID");
 
     List<String> rawImagePaths = java.util.Arrays.asList(
             "/image/standard1.jpeg",
@@ -203,9 +203,15 @@
 
                 <div class="avail">
                     <p class="availability">Only available rooms displayed</p>
-                    <button class="btn choose-btn" data-roomid="<%= room.getId() %>" data-roomname="<%= room.getName() %>" data-price="<%= room.getPrice() %>" data-userid="<%= userID %>">
-                        Choose
-                    </button>
+                    <% if (userName != null && "user".equals(userRole) || userName != null && "admin".equals(userRole)) { %>
+                        <button class="btn choose-btn" data-roomid="<%= room.getId() %>" data-roomname="<%= room.getName() %>" data-price="<%= room.getPrice() %>" data-userid="<%= userID %>">
+                            Choose
+                        </button>
+                    <% } else { %>
+                        <button class="btn choose-btn"  >
+                            <a href="${pageContext.request.contextPath}/login/login.jsp">Login to book</a>
+                        </button>
+                    <% } %>
                 </div>
             </div>
         </div>
