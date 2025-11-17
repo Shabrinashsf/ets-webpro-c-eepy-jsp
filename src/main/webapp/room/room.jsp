@@ -162,7 +162,7 @@
             int currentImageIndex = 0;
             for(RoomType room : roomTypes) {
         %>
-        <div class="box">
+        <div class="box" data-roomtypeid="<%= room.getId() %>">
             <div class="<%= room.getName().toLowerCase() %>">
                 <h1><%= room.getName() %> Room</h1>
                 <p class="price">Rp<%= room.getPrice() %>/night</p>
@@ -202,7 +202,7 @@
                 </div>
 
                 <div class="avail">
-                    <p>Only available rooms displayed</p>
+                    <p class="availability">Only available rooms displayed</p>
                     <button class="btn choose-btn" data-roomid="<%= room.getId() %>" data-roomname="<%= room.getName() %>" data-price="<%= room.getPrice() %>" data-userid="<%= userID %>">
                         Choose
                     </button>

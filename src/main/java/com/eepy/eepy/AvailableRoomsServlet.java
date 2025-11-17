@@ -23,13 +23,10 @@ public class AvailableRoomsServlet extends HttpServlet {
 
         String checkinStr = request.getParameter("checkin");
         String checkoutStr = request.getParameter("checkout");
-
         Map<Integer, List<Integer>> availableRoomsMap = new HashMap<>();
 
         try (Connection conn = DBConnection.getConnection()) {
             BookingDAO bookingDAO = new BookingDAO(conn);
-
-            // ambil semua room types
             List<RoomType> roomTypes = bookingDAO.getAllRoomTypes(conn);
 
             for (RoomType roomType : roomTypes) {

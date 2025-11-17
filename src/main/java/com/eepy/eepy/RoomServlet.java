@@ -14,17 +14,13 @@ import java.util.List;
 
 @WebServlet("/rooms")
 public class RoomServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Connection conn = DBConnection.getConnection();
             RoomTypeDAO roomTypeDAO = new RoomTypeDAO(conn);
 
-            // Ambil semua room types
             List<RoomType> roomTypes = roomTypeDAO.getAllRoomTypes();
-
-            // Bisa tambahkan filter untuk available rooms nanti kalau mau
             request.setAttribute("roomTypes", roomTypes);
 
             conn.close();

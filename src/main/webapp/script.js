@@ -263,6 +263,39 @@ nextButton.addEventListener("click", () => {
 let mulai = "";
 let selesai = "";
 
+function fetchAvailableRooms() {
+    if (!start || !end) return;
+
+    const url = `${window.contextPath}/available-rooms?checkin=${formatDate(start)}&checkout=${formatDate(end)}`;
+
+    fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error(`Network response not ok: ${res.status}`);
+            return res.json();
+        })
+        .then(data => {
+            updateRoomDisplay(data); // data = { roomTypeId1: [id1,id2], ... }
+        })
+        .catch(err => {
+            console.error("Error fetching rooms:", err);
+            alert("Failed to fetch available rooms. Please try again.");
+        });
+}
+
+function updateRoomDisplay(availableRooms) {
+    document.querySelectorAll(".types .box").forEach((box) => {
+        const roomTypeId = parseInt(box.dataset.roomtypeid);
+        const availableIds = availableRooms[roomTypeId] || [];
+        const p = box.querySelector(".availability");
+
+        if (availableIds.length > 0) {
+            p.textContent = `Available rooms: ${availableIds.length}`;
+        } else {
+            p.textContent = "No rooms available in this type";
+        }
+    });
+}
+
 //handle apply selection click
 applyButton.addEventListener("click", () => {
     if (start && end) {
@@ -273,6 +306,9 @@ applyButton.addEventListener("click", () => {
 
         mulai = startDate;
         selesai = endDate;
+
+        // panggil fetch
+        fetchAvailableRooms();
     }
 });
 

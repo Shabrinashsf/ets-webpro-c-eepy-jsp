@@ -83,7 +83,7 @@ public class BookingDAO {
 
     public List<RoomType> getAllRoomTypes(Connection conn) throws SQLException {
         List<RoomType> roomTypes = new ArrayList<>();
-        String sql = "SELECT id, name, price, description, area, capacity FROM room_type";
+        String sql = "SELECT id, name, price, description, area, capacity FROM room_types";
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -102,7 +102,7 @@ public class BookingDAO {
 
     public List<Integer> getAllRoomIdsByRoomType(int roomTypeId) throws SQLException {
         List<Integer> roomIds = new ArrayList<>();
-        String sql = "SELECT id FROM room WHERE room_type_id = ?";
+        String sql = "SELECT id FROM rooms WHERE room_type_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, roomTypeId);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -116,7 +116,7 @@ public class BookingDAO {
 
     public List<Integer> getBookedRoomIdsByRoomType(int roomTypeId, Date checkin, Date checkout) throws SQLException {
         List<Integer> bookedIds = new ArrayList<>();
-        String sql = "SELECT roomid FROM booking b JOIN room r ON b.roomid = r.id " +
+        String sql = "SELECT room_id FROM bookings b JOIN rooms r ON b.room_id = r.id " +
                 "WHERE r.room_type_id = ? AND " +
                 "((b.checkin BETWEEN ? AND ?) OR " +
                 "(b.checkout BETWEEN ? AND ?) OR " +
