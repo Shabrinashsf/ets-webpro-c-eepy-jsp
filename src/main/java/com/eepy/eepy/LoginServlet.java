@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT password, name, role FROM users WHERE email = ?";
+            String sql = "SELECT password, name, role, id FROM users WHERE email = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
 
@@ -36,10 +36,12 @@ public class LoginServlet extends HttpServlet {
                 String hashedPassword = rs.getString("password");
                 String name = rs.getString("name");
                 String role = rs.getString("role");
+                int id = rs.getInt("id");
                 if (BCrypt.checkpw(password, hashedPassword)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("userName", name);
                     session.setAttribute("userRole", role);
+                    session.setAttribute("userID", id);
                     response.sendRedirect("index.jsp");
                 } else {
                     response.sendRedirect("login/login.jsp");

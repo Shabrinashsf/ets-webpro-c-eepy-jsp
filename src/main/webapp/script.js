@@ -290,15 +290,42 @@ updateCalendars();
 
 document.querySelectorAll(".choose-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
-        console.log("this.dataset:", this.dataset);
+        const dateInput = document.querySelector(".datepicker input");
+        const dateRangeValue = dateInput ? dateInput.value : "";
+
+        if (!dateRangeValue || dateRangeValue === "Select date" || !dateRangeValue.includes(" - ")) {
+            alert("Please select check-in and check-out dates first.");
+            return;
+        }
+
+        const dates = dateRangeValue.split(" - ");
+        const start = dates[0].trim();
+        const end = dates[1].trim();
+
         const roomTypeId = this.dataset.roomid;
         const roomName = this.dataset.roomname;
         const price = Number(this.dataset.price);
+        const userId = this.dataset.userid;
 
-        const start = mulai;
-        const end = selesai;
+        function formatDateToISO(dateStr) {
+            const [m,d,y] = dateStr.split('/');
+            return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+        }
+        const startISO = formatDateToISO(start);
+        const endISO = formatDateToISO(end);
 
-        const url = `/booking?room_type_id=${roomTypeId}&room_name=${roomName}&price=${price}&checkin=${start}&checkout=${end}`;
+        const url = window.contextPath + `/booking?room_type_id=${roomTypeId}&room_name=${roomName}&price=${price}&checkin=${startISO}&checkout=${endISO}&user_id=${userId}`;
+
+        console.log("--- DD: Choose Button Clicked ---");
+        console.log("Room ID (roomTypeId):", roomTypeId);
+        console.log("Room Name (roomName):", roomName);
+        console.log("Price:", price);
+        console.log("Check-in (start):", startISO);
+        console.log("Check-out (end):", endISO);
+        console.log("Generated URL:", url);
+        console.log("User ID:", userId);
+        console.log("---------------------------------");
+
         window.location.href = url;
     });
 });

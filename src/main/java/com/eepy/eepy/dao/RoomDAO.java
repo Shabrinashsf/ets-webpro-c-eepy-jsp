@@ -206,5 +206,51 @@ public class RoomDAO {
                 }
                 return null;
         }
+
+        public Integer getAvailableRoomId(int roomTypeId, Date checkin, Date checkout, List<Integer> bookedRoomIds) throws Exception {
+            Integer availableRoomId = null;
+
+            // Query untuk mencari kamar fisik berdasarkan room_type_id
+            // dan yang ID-nya TIDAK ADA dalam daftar bookedRoomIds
+            String sql = "SELECT id FROM rooms WHERE room_type_id = ? AND id NOT IN (?)";
+
+            // Catatan: Statement 'id NOT IN (?)' dengan PreparedStatement bisa jadi tricky
+            // jika List bookedRoomIds kosong atau besar. Kita akan memparsingnya secara dinamis.
+
+            StringBuilder sqlBuilder = new StringBuilder("SELECT id FROM rooms WHERE room_type_id = ?");
+
+            if (!bookedRoomIds.isEmpty()) {
+                sqlBuilder.append(" AND id NOT IN (");
+                for (int i = 0; i < bookedRoomIds.size(); i++) {
+                    sqlBuilder.append("?");
+                    if (i < bookedRoomIds.size() - 1) {
+                        sqlBuilder.append(",");
+                    }
+                }
+                sqlBuilder.append(")");
+            }
+
+            // Menambahkan ORDER BY RAND() untuk mengambil secara acak, seperti di Laravel
+            sqlBuilder.append(" ORDER BY RAND() LIMIT 1");
+
+            PreparedStatement ps = conn.prepareStatement(sqlBuilder.toString());
+
+            int paramIndex = 1;
+            ps.setInt(paramIndex++, roomTypeId);
+
+            if (!bookedRoomIds.isEmpty()) {
+                for (int roomId : bookedRoomIds) {
+                    ps.setInt(paramIndex++, roomId);
+                }
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                availableRoomId = rs.getInt("id");
+            }
+
+            return availableRoomId;
+        }
     }
 }

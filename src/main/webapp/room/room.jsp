@@ -1,6 +1,7 @@
 <%
     String userName = (String) session.getAttribute("userName");
     String userRole = (String) session.getAttribute("userRole");
+    int userID = (int) session.getAttribute("userID");
 
     List<String> rawImagePaths = java.util.Arrays.asList(
             "/image/standard1.jpeg",
@@ -51,7 +52,7 @@
 
     <div class="navbar-title">
         <a href="${pageContext.request.contextPath}/index.jsp">Homepage</a>
-        <a href="${pageContext.request.contextPath}/room/room.jsp">Room</a>
+        <a href="${pageContext.request.contextPath}/rooms">Room</a>
     </div>
 
     <div>
@@ -152,6 +153,8 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="selectedCheckin" value="">
+        <input type="hidden" id="selectedCheckout" value="">
     </div>
 
     <div class="types">
@@ -200,7 +203,7 @@
 
                 <div class="avail">
                     <p>Only available rooms displayed</p>
-                    <button class="btn choose-btn" data-roomname="<%= room.getName() %>" data-price="<%= room.getPrice() %>">
+                    <button class="btn choose-btn" data-roomid="<%= room.getId() %>" data-roomname="<%= room.getName() %>" data-price="<%= room.getPrice() %>" data-userid="<%= userID %>">
                         Choose
                     </button>
                 </div>
@@ -233,7 +236,6 @@
 
 <!-- JS -->
 <script>
-    window.contextPath = "${pageContext.request.contextPath}";
     window.images = [
         "${pageContext.request.contextPath}/image/home-hotel.jpg",
         "${pageContext.request.contextPath}/image/home-hotel2.jpeg",
@@ -241,6 +243,8 @@
         "${pageContext.request.contextPath}/image/home-hotel4.jpeg",
         "${pageContext.request.contextPath}/image/home-hotel5.jpeg"
     ];
+    window.contextPath = '<%= request.getContextPath() %>';
+    window.bookingPath = '<%= request.getContextPath() %>/booking';
 </script>
 <script src="${pageContext.request.contextPath}/script.js"></script>
 </body>

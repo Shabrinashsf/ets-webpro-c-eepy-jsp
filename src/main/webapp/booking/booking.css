@@ -1,0 +1,666 @@
+:root {
+    --bg: #fbf8ef;
+    --primary: #78b3ce;
+    --border: #f2f2f2;
+    --text: #040720;
+    --accent: #f96e2a;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+/* Booking */
+.booking {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    padding: 1.4rem 5%;
+    align-items: center;
+    color: var(--text);
+    gap: 1rem;
+}
+
+.booking .box {
+    display: flex;
+    flex-direction: column;
+    width: 70rem;
+    padding: 2rem 5%;
+    background-color: var(--bg);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.box .title {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text);
+    color: var(--bg);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    flex-shrink: 0;
+}
+
+.box .input-box {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.box .input-box input {
+    border-radius: 20px;
+    border: solid 1.2px rgba(4, 7, 32, 0.2);
+    outline: none;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    background-color: var(--border);
+    transition: 0.2s ease;
+}
+
+.box .input-box input:hover {
+    border: solid 1.2px var(--accent);
+    transition: 0.2s ease;
+}
+
+.box .input-box input:focus {
+    border: solid 1.2px var(--text);
+}
+
+.book-detail h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.book-time {
+    padding: 0 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.book-time .box-check {
+    width: 300px;
+    background-color: var(--border);
+    border-radius: 20px;
+    padding: 1.4rem;
+    border: solid 1.2px rgba(4, 7, 32, 0.2);
+}
+
+.book-time .box-check h2 {
+    margin: 0.8rem 0;
+    text-align: center;
+    color: var(--accent);
+}
+
+.book-time p.b-title {
+    font-weight: 700;
+}
+
+.book-detail .room-qty {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.box .total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.4rem 0;
+    padding: 1rem 1rem;
+    background-color: #f96e2a10;
+    color: var(--text);
+    border-radius: 20px;
+}
+
+.box .total h2.price {
+    color: var(--accent);
+}
+
+.box .book-detail .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+    width: 150px;
+    margin-left: auto;
+    transition: 0.2s ease;
+}
+
+.box .book-detail .btn:hover {
+    background-color: #cd581d;
+    transition: 0.2s ease;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary);
+    text-align: center;
+    padding: 0.2rem 0;
+    color: white;
+}
+
+footer .credit {
+    padding: 1rem 0;
+}
+
+footer .credit p {
+    color: var(--bg);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: small;
+}
+
+/* Media Queries */
+/* Laptop */
+@media (max-width: 1366px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    html {
+        font-size: 80%;
+    }
+
+    .navbar {
+        background-color: transparent;
+        transition: background-color 0.2s ease;
+    }
+
+    .navbar .avatar img {
+        width: 48px;
+        height: 27px;
+    }
+
+    .navbar.scrolled {
+        background-color: var(--primary);
+    }
+
+    .navbar .navbar-title {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        background-color: var(--primary);
+        width: 30rem;
+        height: 100vh;
+        transition: 0.3s;
+        z-index: 99;
+        overflow-y: auto;
+    }
+
+    .navbar .navbar-title.active {
+        right: 0;
+    }
+
+    .navbar .navbar-title a {
+        color: var(--bg);
+        display: block;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+
+    .navbar .navbar-nav a::after {
+        transform-origin: 0 0;
+    }
+
+    .navbar .navbar-nav a:hover::after {
+        transform: scaleX(0.2);
+    }
+
+    .navbar-title a {
+        display: none;
+    }
+
+    .navbar-extra .sign {
+        display: none;
+    }
+
+    #ham-menu {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        align-items: center;
+    }
+
+    .background {
+        height: 470px;
+    }
+
+    .hero {
+        padding-top: 1.4rem;
+        position: absolute;
+        width: 100%;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 4em;
+    }
+
+    .hero h2 {
+        font-size: 2em;
+        font-weight: 500;
+        color: var(--accent);
+    }
+}
+
+/* HP */
+@media (max-width: 450px) {
+    html {
+        font-size: 62.5%;
+    }
+
+    .navbar-title a {
+        display: none;
+    }
+
+    .navbar-extra .sign {
+        display: none;
+    }
+
+    #ham-menu {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+    }
+
+    .background {
+        height: 250px;
+    }
+
+    .hero {
+        padding-top: 1.4rem;
+        position: absolute;
+        width: 100%;
+        top: 13%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 3em;
+    }
+
+    .hero h2 {
+        font-size: 1.4em;
+        font-weight: 500;
+        color: var(--accent);
+    }
+}
+
+/* Payment */
+.page {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    padding: 1.4rem 5%;
+    align-items: center;
+    color: var(--text);
+    gap: 1rem;
+}
+
+.page .box {
+    display: flex;
+    flex-direction: column;
+    width: 70rem;
+    padding: 2rem 5%;
+    background-color: var(--bg);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.box .title {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text);
+    color: var(--bg);
+    font-weight: 500;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    flex-shrink: 0;
+}
+
+.box p.book-id {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.box .input-box {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.box .input-box input:hover {
+    border: solid 1.2px var(--text);
+    transition: 0.2s ease;
+}
+
+.box .input-box input:focus {
+    border: solid 1.2px var(--text);
+}
+
+.book-detail h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.book-time {
+    padding: 0 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.book-time .box-check {
+    width: 300px;
+    background-color: var(--border);
+    border-radius: 20px;
+    padding: 1.4rem;
+    border: solid 1.2px rgba(4, 7, 32, 0.2);
+}
+
+.book-time .box-check h2 {
+    margin: 0.8rem 0;
+    text-align: center;
+    color: var(--accent);
+}
+
+.book-time p.b-title {
+    font-weight: 700;
+}
+
+.room-qty {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.method {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    padding: 1.4rem 5%;
+    font-size: 1.2rem;
+}
+
+.method .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1.4rem;
+    margin: 0.3rem 0;
+    background-color: var(--border);
+    border-radius: 20px;
+    border: solid 1.2px #04072050;
+    transition: 0.2s ease;
+    cursor: pointer;
+    gap: 20px;
+}
+
+.method .option:hover {
+    border: solid 1.2px #f96e2a;
+    transition: 0.2s ease;
+}
+
+#option-1:checked ~ .option-1,
+#option-2:checked ~ .option-2,
+#option-3:checked ~ .option-3 {
+    background: var(--accent);
+}
+
+.method .option .dot {
+    height: 20px;
+    width: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: relative;
+}
+
+#option-1:checked ~ .option-1 .dot,
+#option-2:checked ~ .option-2 .dot,
+#option-3:checked ~ .option-3 .dot {
+    background: var(--border);
+}
+
+.method .option .dot::before {
+    position: absolute;
+    content: "";
+    left: 4px;
+    top: 4px;
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    background: #fbf8ef;
+    opacity: 0;
+}
+
+#option-1:checked ~ .option-1 .dot::before,
+#option-2:checked ~ .option-2 .dot::before,
+#option-3:checked ~ .option-3 .dot::before {
+    opacity: 1;
+}
+
+#option-1:checked ~ .option-1 span,
+#option-2:checked ~ .option-2 span,
+#option-3:checked ~ .option-3 span {
+    color: var(--bg);
+}
+
+.method input[type="radio"] {
+    display: none;
+}
+
+.box .total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.4rem 0;
+    padding: 1rem 1rem;
+    background-color: #f96e2a10;
+    color: var(--text);
+    border-radius: 20px;
+}
+
+.box .total h2.price {
+    color: var(--accent);
+}
+
+.box .payment .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+    width: 150px;
+    margin-left: auto;
+    transition: 0.2s ease;
+}
+
+.box .payment .btn:hover {
+    background-color: #cd581d;
+    transition: 0.2s ease;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary);
+    text-align: center;
+    padding: 0.2rem 0;
+    color: white;
+}
+
+footer .credit {
+    padding: 1rem 0;
+}
+
+footer .credit p {
+    color: var(--bg);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: small;
+}
+
+/* Media Queries */
+/* Laptop */
+@media (max-width: 1366px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    html {
+        font-size: 80%;
+    }
+
+    .navbar {
+        background-color: transparent;
+        transition: background-color 0.2s ease;
+    }
+
+    .navbar .avatar img {
+        width: 48px;
+        height: 27px;
+    }
+
+    .navbar.scrolled {
+        background-color: var(--primary);
+    }
+
+    .navbar .navbar-title {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        background-color: var(--primary);
+        width: 30rem;
+        height: 100vh;
+        transition: 0.3s;
+        z-index: 99;
+        overflow-y: auto;
+    }
+
+    .navbar .navbar-title.active {
+        right: 0;
+    }
+
+    .navbar .navbar-title a {
+        color: var(--bg);
+        display: block;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+
+    .navbar .navbar-nav a::after {
+        transform-origin: 0 0;
+    }
+
+    .navbar .navbar-nav a:hover::after {
+        transform: scaleX(0.2);
+    }
+
+    .navbar-title a {
+        display: none;
+    }
+
+    .navbar-extra .sign {
+        display: none;
+    }
+
+    #ham-menu {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        align-items: center;
+    }
+
+    .background {
+        height: 470px;
+    }
+
+    .hero {
+        padding-top: 1.4rem;
+        position: absolute;
+        width: 100%;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 4em;
+    }
+
+    .hero h2 {
+        font-size: 2em;
+        font-weight: 500;
+        color: var(--accent);
+    }
+}
