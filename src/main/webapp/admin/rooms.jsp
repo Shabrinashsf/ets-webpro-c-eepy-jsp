@@ -110,11 +110,11 @@
         <form id="addRoomForm" method="post" action="${pageContext.request.contextPath}/admin/rooms/add" class="space-y-3">
             <div>
                 <label class="block text-sm font-medium text-gray-700">Room Number</label>
-                <input type="text" name="number" class="w-full border rounded-xl px-3 py-2">
+                <input type="text" name="number" class="w-full border rounded-xl px-3 py-2 text-black">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Room Type</label>
-                <select name="room_type_id" class="w-full border rounded-xl px-3 py-2">
+                <select name="room_type_id" class="w-full border rounded-xl px-3 py-2 text-black">
                     <%
                         for(RoomType t : types){
                     %>
@@ -126,7 +126,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" class="w-full border rounded-xl px-3 py-2">
+                <select name="status" class="w-full border rounded-xl px-3 py-2 text-black">
                     <option value="Available">Available</option>
                     <option value="Unavailable">Unavailable</option>
                     <option value="Maintenance">Maintenance</option>
@@ -149,11 +149,11 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Room Number</label>
                 <input type="text" name="number" id="editRoomNumber"
-                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none">
+                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none text-black">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Room Type</label>
-                <select name="room_type_id" id="editRoomType" class="w-full border rounded-xl px-3 py-2">
+                <select name="room_type_id" id="editRoomType" class="w-full border rounded-xl px-3 py-2 text-black">
                     <%
                         for(RoomType t : types){
                     %>
@@ -165,7 +165,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" id="editRoomStatus" class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none">
+                <select name="status" id="editRoomStatus" class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none text-black">
                     <option value="Available">Available</option>
                     <option value="Unavailable">Unavailable</option>
                     <option value="Maintenance">Maintenance</option>

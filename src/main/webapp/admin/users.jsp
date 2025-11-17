@@ -102,17 +102,17 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" id="editUserName"
-                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none">
+                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none text-black">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" id="editUserEmail"
-                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none">
+                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none text-black">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Phone</label>
                 <input type="text" name="telp_number" id="editUserPhone"
-                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none">
+                       class="w-full border border-[#d8ecf7] rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#78b3ce] outline-none text-black">
             </div>
             <div class="flex justify-end gap-3 mt-4">
                 <button type="button" onclick="closeUserEditModal()"
