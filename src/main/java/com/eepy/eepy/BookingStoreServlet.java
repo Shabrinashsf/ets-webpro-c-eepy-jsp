@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @WebServlet("/booking-store")
 public class BookingStoreServlet extends HttpServlet {
@@ -19,28 +17,31 @@ public class BookingStoreServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8"); // penting kalau ada karakter unik
         try {
             // Ambil semua data dari form
-            String userId = request.getParameter("user_id");
-            String roomTypeId = request.getParameter("room_type_id");
-            //harusnya roomid
+            String user_idStr = request.getParameter("user_id");
+            //String room_idStr = request.getParameter("room_id");
             String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            int totalPrice = Integer.parseInt(request.getParameter("total_price"));
+            String phone = request.getParameter("phone_number");
             String checkin = request.getParameter("checkin");
+            String priceStr = request.getParameter("price");
             String checkout = request.getParameter("checkout");
             String paymentMethod = request.getParameter("payment_method");
 
+            int price = Integer.parseInt(priceStr);
+            int user_id = Integer.parseInt(user_idStr);
+            //int room_id = Integer.parseInt(room_idStr);
+
             // Simpan ke DB
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "INSERT INTO bookings (user_id, room_id, name, phone, checkin, checkout, payment_method, total_price) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO bookings (user_id, room_id, name, phone_number, checkin, checkout, price, payment_method) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                    stmt.setString(1, userId);
-                    stmt.setString(2, roomTypeId);
+                    stmt.setInt(1, user_id);
+                    stmt.setInt(2, 1);
                     stmt.setString(3, name);
                     stmt.setString(4, phone);
                     stmt.setString(5, checkin);
                     stmt.setString(6, checkout);
-                    stmt.setInt(7, totalPrice);
+                    stmt.setInt(7, price);
                     stmt.setString(8, paymentMethod);
 
                     stmt.executeUpdate();
@@ -53,7 +54,12 @@ public class BookingStoreServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             // kalau error, redirect ke halaman error
-            response.sendRedirect(request.getContextPath() + "/booking-error.jsp");
+            //response.sendRedirect(request.getContextPath() + "/booking-error.jsp");
+
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+
+            response.getWriter().write("ERROR: " + e.getMessage());
         }
     }
 }

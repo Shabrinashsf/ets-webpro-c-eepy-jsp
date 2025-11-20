@@ -282,10 +282,15 @@ function fetchAvailableRooms() {
         });
 }
 
-function updateRoomDisplay(availableRooms) {
+function updateRoomDisplay(data) {
+    const availableRooms = data.availableRooms;
+    const randomPick = data.randomPick;
+
     document.querySelectorAll(".types .box").forEach((box) => {
         const roomTypeId = parseInt(box.dataset.roomtypeid);
         const availableIds = availableRooms[roomTypeId] || [];
+        const randomId = randomPick[roomTypeId];
+
         const p = box.querySelector(".availability");
 
         if (availableIds.length > 0) {
@@ -293,6 +298,8 @@ function updateRoomDisplay(availableRooms) {
         } else {
             p.textContent = "No rooms available in this type";
         }
+
+        box.dataset.randomroomid = randomId;
     });
 }
 
@@ -312,6 +319,28 @@ applyButton.addEventListener("click", () => {
     }
 });
 
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("choose-btn")) {
+
+        const box = e.target.closest(".box");
+        const randomId = box.dataset.randomroomid;
+
+        console.log("Picked Random Room ID:", randomId);
+
+        // kalau kamu mau redirect ke booking page:
+        // const roomTypeId = e.target.dataset.roomid;
+        // window.location.href = `${window.bookingPath}?roomId=${randomId}&roomType=${roomTypeId}`;
+
+        if (!randomId || randomId == -1) {
+            alert("No room available for this type.");
+            return;
+        }
+
+        alert("Room picked: " + randomId);
+    }
+});
+
+
 //handle cancel selection click
 cancelButton.addEventListener("click", () => {
     start = originalStart;
@@ -324,8 +353,50 @@ cancelButton.addEventListener("click", () => {
 //init datepicker
 updateCalendars();
 
-document.querySelectorAll(".choose-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
+// document.querySelectorAll(".choose-btn").forEach((btn) => {
+//     btn.addEventListener("click", function () {
+//         const dateInput = document.querySelector(".datepicker input");
+//         const dateRangeValue = dateInput ? dateInput.value : "";
+//
+//         if (!dateRangeValue || dateRangeValue === "Select date" || !dateRangeValue.includes(" - ")) {
+//             alert("Please select check-in and check-out dates first.");
+//             return;
+//         }
+//
+//         const dates = dateRangeValue.split(" - ");
+//         const start = dates[0].trim();
+//         const end = dates[1].trim();
+//
+//         const roomTypeId = this.dataset.roomid;
+//         const roomName = this.dataset.roomname;
+//         const price = Number(this.dataset.price);
+//         const userId = this.dataset.userid;
+//
+//         function formatDateToISO(dateStr) {
+//             const [m,d,y] = dateStr.split('/');
+//             return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+//         }
+//         const startISO = formatDateToISO(start);
+//         const endISO = formatDateToISO(end);
+//
+//         const url = window.contextPath + `/booking?room_type_id=${roomTypeId}&room_name=${roomName}&price=${price}&checkin=${startISO}&checkout=${endISO}&user_id=${userId}`;
+//
+//         console.log("--- DD: Choose Button Clicked ---");
+//         console.log("Room ID (roomTypeId):", roomTypeId);
+//         console.log("Room Name (roomName):", roomName);
+//         console.log("Price:", price);
+//         console.log("Check-in (start):", startISO);
+//         console.log("Check-out (end):", endISO);
+//         console.log("Generated URL:", url);
+//         console.log("User ID:", userId);
+//         console.log("---------------------------------");
+//
+//         window.location.href = url;
+//     });
+// });
+
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("choose-btn")) {
         const dateInput = document.querySelector(".datepicker input");
         const dateRangeValue = dateInput ? dateInput.value : "";
 
@@ -334,14 +405,21 @@ document.querySelectorAll(".choose-btn").forEach((btn) => {
             return;
         }
 
+        const box = e.target.closest(".box");
+        const randomRoomId = box.dataset.randomroomid;
+
+        if (!randomRoomId || randomRoomId == "-1") {
+            alert("No room available for this type.");
+            return;
+        }
+
         const dates = dateRangeValue.split(" - ");
         const start = dates[0].trim();
         const end = dates[1].trim();
 
-        const roomTypeId = this.dataset.roomid;
-        const roomName = this.dataset.roomname;
-        const price = Number(this.dataset.price);
-        const userId = this.dataset.userid;
+        const roomName = e.target.dataset.roomname;
+        const price = Number(e.target.dataset.price);
+        const userId = e.target.dataset.userid;
 
         function formatDateToISO(dateStr) {
             const [m,d,y] = dateStr.split('/');
@@ -350,11 +428,11 @@ document.querySelectorAll(".choose-btn").forEach((btn) => {
         const startISO = formatDateToISO(start);
         const endISO = formatDateToISO(end);
 
-        const url = window.contextPath + `/booking?room_type_id=${roomTypeId}&room_name=${roomName}&price=${price}&checkin=${startISO}&checkout=${endISO}&user_id=${userId}`;
+        const url = window.contextPath + `/booking?room_name=${roomName}&room_id=${randomRoomId}&price=${price}&checkin=${startISO}&checkout=${endISO}&user_id=${userId}`;
 
         console.log("--- DD: Choose Button Clicked ---");
-        console.log("Room ID (roomTypeId):", roomTypeId);
         console.log("Room Name (roomName):", roomName);
+        console.log("Room ID (room):", randomRoomId);
         console.log("Price:", price);
         console.log("Check-in (start):", startISO);
         console.log("Check-out (end):", endISO);
@@ -363,5 +441,8 @@ document.querySelectorAll(".choose-btn").forEach((btn) => {
         console.log("---------------------------------");
 
         window.location.href = url;
-    });
+
+        console.log("Redirecting with random room:", randomRoomId);
+    }
 });
+

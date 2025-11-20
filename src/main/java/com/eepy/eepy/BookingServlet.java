@@ -23,8 +23,8 @@ public class BookingServlet extends HttpServlet {
             // ambil data dari query string
             String checkinStr = request.getParameter("checkin");
             String checkoutStr = request.getParameter("checkout");
-            String roomTypeId = request.getParameter("room_type_id");
             String roomName = request.getParameter("room_name");
+            String roomID = request.getParameter("room_id");
             String priceStr = request.getParameter("price");
             String userIdStr = request.getParameter("user_id");
 
@@ -39,13 +39,13 @@ public class BookingServlet extends HttpServlet {
             // buat map data untuk dikirim ke JSP (mirip $data di Laravel)
             Map<String, Object> data = new HashMap<>();
             data.put("user_id", userId);
-            data.put("room_type_id", roomTypeId);
             data.put("room_name", roomName);
             data.put("checkin", checkinStr);
             data.put("checkout", checkoutStr);
             data.put("price_per_night", price);
             data.put("nights", nights);
             data.put("total_price", price * nights);
+            data.put("room_id", roomID);
 
             // set attribute dan forward ke booking.jsp
             request.setAttribute("data", data);

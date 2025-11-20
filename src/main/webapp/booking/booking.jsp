@@ -15,7 +15,7 @@
     NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("in", "ID"));
 
     int userId = (int) data.get("user_id");
-    String roomTypeId = (String) data.get("room_type_id");
+    String roomID = (String) data.get("room_id");
     String roomName = (String) data.get("room_name");
     String checkin = (String) data.get("checkin");
     String checkout = (String) data.get("checkout");
@@ -58,10 +58,10 @@
                 <div class="book-data">
                     <!-- Hidden fields untuk passing data -->
                     <input type="hidden" name="user_id" value="<%= userId %>">
-                    <input type="hidden" name="room_type_id" value="<%= roomTypeId %>">
+                    <input type="hidden" name="room_id" value="<%= roomID %>">
                     <input type="hidden" name="checkin" value="<%= checkin %>">
                     <input type="hidden" name="checkout" value="<%= checkout %>">
-                    <input type="hidden" name="total_price" value="<%= totalPrice %>">
+                    <input type="hidden" name="price" value="<%= totalPrice %>">
 
                     <div class="title">
                         <i data-feather="edit"></i>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="input-box">
                         <h2>Phone Number</h2>
-                        <input type="text" name="phone" placeholder="+62XXX" required />
+                        <input type="text" name="phone_number" placeholder="+62XXX" required />
                     </div>
                 </div>
             </div>

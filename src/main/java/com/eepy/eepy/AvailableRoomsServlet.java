@@ -23,7 +23,9 @@ public class AvailableRoomsServlet extends HttpServlet {
 
         String checkinStr = request.getParameter("checkin");
         String checkoutStr = request.getParameter("checkout");
+
         Map<Integer, List<Integer>> availableRoomsMap = new HashMap<>();
+        Map<Integer, Integer> randomPickMap = new HashMap<>();
 
         try (Connection conn = DBConnection.getConnection()) {
             BookingDAO bookingDAO = new BookingDAO(conn);
@@ -39,11 +41,21 @@ public class AvailableRoomsServlet extends HttpServlet {
                 List<Integer> allRoomIds = bookingDAO.getAllRoomIdsByRoomType(roomType.getId());
                 allRoomIds.removeAll(bookedIds);
 
+                int selectedRoomId = -1;
+                if (!allRoomIds.isEmpty()) {
+                    selectedRoomId = allRoomIds.get(new java.util.Random().nextInt(allRoomIds.size()));
+                }
+
                 availableRoomsMap.put(roomType.getId(), allRoomIds);
+                randomPickMap.put(roomType.getId(), selectedRoomId);
             }
 
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("availableRooms", availableRoomsMap);
+            responseData.put("randomPick", randomPickMap);
+
             response.setContentType("application/json");
-            response.getWriter().write(new Gson().toJson(availableRoomsMap));
+            response.getWriter().write(new Gson().toJson(responseData));
 
         } catch (Exception e) {
             e.printStackTrace();
