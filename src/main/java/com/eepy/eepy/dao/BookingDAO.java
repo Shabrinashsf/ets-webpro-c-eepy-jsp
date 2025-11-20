@@ -137,4 +137,34 @@ public class BookingDAO {
         }
         return bookedIds;
     }
+
+    public List<Booking> getBookingByUserId(int userId) throws Exception {
+        List<Booking> list = new ArrayList<>();
+
+        String sql = "SELECT id, user_id, room_id, name, phone_number, checkin, checkout, price, payment_method " +
+                "FROM bookings WHERE user_id = ? ORDER BY checkin DESC";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, userId);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Booking b = new Booking();
+
+            b.setId(rs.getInt("id"));
+            b.setUserId(rs.getInt("user_id"));
+            b.setRoomId(rs.getInt("room_id"));
+            b.setName(rs.getString("name"));
+            b.setPhone_number(rs.getString("phone_number"));
+            b.setCheckin(rs.getDate("checkin"));
+            b.setCheckout(rs.getDate("checkout"));
+            b.setPrice(rs.getInt("price"));
+            b.setPaymentMethod(rs.getString("payment_method"));
+
+            list.add(b);
+        }
+
+        return list;
+    }
 }

@@ -16,6 +16,7 @@
     request.setAttribute("profile", "Users");
     request.setAttribute("orders", "Rooms");
     request.setAttribute("active", active);
+    request.setAttribute("sidebarOpen", "true");
 %>
 
 <!DOCTYPE html>

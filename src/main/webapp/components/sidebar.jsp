@@ -11,7 +11,7 @@
 <!-- Alpine.js -->
 <script src="https://unpkg.com/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
 
-<div x-data="{ open: false }" class="relative">
+<div x-data="{ open: <%= "true".equals(request.getAttribute("sidebarOpen")) ? "true" : "false" %> }"
 
     <!-- Hamburger (mobile only) -->
     <button
@@ -47,7 +47,7 @@
                 <%-- USER VERSION: Profile + Orders --%>
                 <% if ("Profile".equals(profile) && "Orders".equals(orders)) { %>
 
-                <a href="${pageContext.request.contextPath}/user/user_profile.jsp"
+                <a href="${pageContext.request.contextPath}/user/profile.jsp?active=profile"
                    class="group flex items-center gap-4 py-3 px-5 rounded-[8px] transition
                        <%= "profile".equals(active)
                            ? "bg-[#fbf8ef] text-[#000000]"
@@ -56,7 +56,7 @@
                     <span><%= profile %></span>
                 </a>
 
-                <a href="${pageContext.request.contextPath}/user/orders.jsp"
+                <a href="${pageContext.request.contextPath}/user/order.jsp?active=orders"
                    class="group flex items-center gap-4 py-3 px-5 rounded-[8px] transition
                        <%= "orders".equals(active)
                            ? "bg-[#fbf8ef] text-[#000000]"
